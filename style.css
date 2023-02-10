@@ -11,11 +11,11 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color: #0369a1;
     color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
+    height: 100vh;
 }
 h1{
     font-size: 36px;
@@ -40,6 +40,7 @@ button{
     text-transform: uppercase;
     color: white;
     background-color: #191D3B;
+    cursor: pointer;
 }
 button:hover{
     background-color: #e1e1e1;
@@ -64,9 +65,26 @@ button:hover{
 display: flex;
 gap: 30px;
 }
+.conditions-weather div{
+    display: flex;
+    gap: 5px;
+}
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+footer{
+    width: 100%;
+    height: 40px;
+    background-color: #191D3B;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+}
+.hidden{
+    display: none;
 }

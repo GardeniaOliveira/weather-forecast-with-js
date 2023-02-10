@@ -15,18 +15,28 @@
     <input type="text" name="search" id="input-search">
     <button type="submit" id="btn-search">search</button>
 </div>
-
-<div class="weather-info"> 
-    <p class="location">Salvador, Brasil</p>
+<p class="error-msg"></p>
+<div class="weather-info hidden"> 
+    <p class="location"></p>
     <p class="degree">15°C</p>
     <div class="conditions-weather">
-        <p class="wind">Wind: 25 km/hrs</p>
-        <p class="wind">Humity: 90%</p>
+        <div>
+            <p class="description">cloudy</p>
+        </div>
+        <div>
+            <i class="fa-solid fa-wind"></i> <p class="wind">150km</p>
+        </div>
+       <div>
+        <i class="fa-solid fa-droplet"> </i> <p class="humidity">93%</p>
+       </div>
+        
     </div>
     
 </div>
 
 </div>
+<footer>Developed by Gardênia Oliveira</footer>
+<script src="https://kit.fontawesome.com/b11962176a.js" crossorigin="anonymous"></script>
     <script src="main.js"></script>
 </body>
 </html>
