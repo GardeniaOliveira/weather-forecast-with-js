@@ -16,7 +16,7 @@ btnSearch.addEventListener("click", () => {
   const city = inputSearch.value;
   inputSearch.value = "";
   showData(city);
-  imageWeather("sun");
+  
 });
 inputSearch.addEventListener("keyup", (e) => {
   if (e.code === "Enter") {
@@ -28,46 +28,54 @@ inputSearch.addEventListener("keyup", (e) => {
 });
 
 const showData = async (city) => {
-  place.innerText = city;
+    try {
   const data = await getData(city);
-
-  place.innerText = data.name;
-  //description.innerText = data.weather[0].description;
+  place.innerText = `${data.name},${data.sys.country}`;
+  description.innerText = data.weather[0].description;
   degree.innerText = `${parseInt(data.main.temp)}°C`;
-  wind.innerText = data.name;
+  wind.innerText = data.wind.speed;
   humidity.innerText = `${data.main.humidity}%`;
 
-  const condition = data.weather[0].description;
+  const condition = data.weather[0].main;
+  imageWeather(condition);
+}  catch (error) {
+    errorMsg.innerText = `City not found`;
+   divWeather.classList.add('hidden')
+  }
 };
 
 //It is async because it needs to wait the datas from api
 const getData = async (city) => {
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?${city}&units=metric&appid=${apiKey}&lang=en;`;
-
-  try {
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=en`;
     const apiReturn = await fetch(apiUrl);
     //change the data to json
     const data = await apiReturn.json();
     console.log(data);
     return data;
-  } catch (error) {
-    errorMsg.innerText = `Location was not find`;
-  }
+ 
 };
 
 function imageWeather(condition) {
-  if (condition === "snow") {
+  if (condition === "Snow") {
     box.style.backgroundImage = `url(img/snow.jpg)`;
     degree.style.color = "#fff";
-  } else if (condition === "cloudy") {
+  } else if (condition === "Clouds") {
     box.style.backgroundImage = `url(img/cloud.jpg)`;
     container.style.color = "#fff";
     degree.style.color = "#fff";
-  } else if (condition === "rain") {
+  } else if (condition === "Rain" || condition === "Drizzle") {
     box.style.backgroundImage = `url(img/rain.jpg)`;
     degree.style.color = "#191D3B";
-  } else if (condition === "sun") {
+  }
+  else if (condition === "Thunderstorm") {
+    box.style.backgroundImage = `url(img/thunderstorm.jpg)`;
+    degree.style.color = "#fff";
+  } else if (condition === "Sun") {
     box.style.backgroundImage = `url(img/sun.jpg)`;
+    degree.style.color = "#fff";
+  }
+  else if (condition === "Clear") {
+    box.style.backgroundImage = `url(img/clear-sky.jpg)`;
     degree.style.color = "#fff";
   }
 }
