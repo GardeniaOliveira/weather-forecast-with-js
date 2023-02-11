@@ -33,7 +33,7 @@ body{
     align-items: center;
     justify-content: center;
     align-self: center;
-    backdrop-filter: blur(30px);
+    backdrop-filter: blur(50px);
     padding: 10px;
     background-repeat: no-repeat;
    

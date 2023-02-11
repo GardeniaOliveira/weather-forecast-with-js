@@ -38,6 +38,7 @@ const showData = async (city) => {
 
   const condition = data.weather[0].main;
   imageWeather(condition);
+  errorMsg.innerText = "";
 }  catch (error) {
     errorMsg.innerText = `City not found`;
    divWeather.classList.add('hidden')
