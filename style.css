@@ -27,19 +27,20 @@ body{
 }
 .container{
     width: 350px;
-    height: 70vh;
    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     align-self: center;
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(30px);
+    padding: 10px;
+    background-repeat: no-repeat;
    
 }
 h1{
     font-size: 36px;
-    margin-bottom: 30px;
+    margin: 10px 0 30px 0;
 }
 
 input, button{
@@ -51,7 +52,7 @@ input, button{
     font-size: 18px;
 }
 input{
-    width: 244px;
+    width: 234px;
     padding: 20px;
 }
 button{
@@ -84,6 +85,7 @@ button:hover{
 .conditions-weather{
 display: flex;
 gap: 30px;
+margin-bottom: 10px;
 }
 .conditions-weather div{
     display: flex;

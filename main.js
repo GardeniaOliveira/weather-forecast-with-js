@@ -16,18 +16,15 @@ btnSearch.addEventListener("click", () =>{
     const city = inputSearch.value;
     inputSearch.value = "";
     showData(city);
-    imageWeather('snow');
+    imageWeather('sun');
 })
 inputSearch.addEventListener("keyup", (e) =>{
     if(e.code === "Enter"){
         divWeather.classList.remove('hidden');
         const city = e.target.value;
         inputSearch.value = "";
-        showData(city);
-       
+        showData(city);   
     }
-   
-
 })
 
 const showData = async(city)=>{
@@ -36,7 +33,7 @@ const showData = async(city)=>{
     
    place.innerText = data.name;
    //description.innerText = data.weather[0].description;
-   degree.innerText = parseInt(data.main.temp);
+   degree.innerText = `${parseInt(data.main.temp)}°C`;
    wind.innerText = data.name;
    humidity.innerText = `${data.main.humidity}%`
 
@@ -62,22 +59,16 @@ return data
 function imageWeather(condition){
     if(condition === "snow"){
         box.style.backgroundImage = `url(img/snow.jpg)`;
-        container.style.color = '#000';
-        inputSearch.style.border = '1px solid #191D3B';
-        
+        degree.style.color = '#fff';
     } else if(condition === "cloudy"){
        box.style.backgroundImage = `url(img/cloud.jpg)`;
-       container.style.backgroundColor = '#fff';
-       container.style.color = '#000';
-       inputSearch.style.border = '1px solid #191D3B';
+       container.style.color = '#fff';
+       degree.style.color = '#fff';
     }else if(condition === "rain"){
        box.style.backgroundImage = `url(img/rain.jpg)`;
-       container.style.backgroundColor = '#fff';
-       container.style.color = '#000';
-       inputSearch.style.border = '1px solid #191D3B';
+       degree.style.color = '#191D3B';
     }else if(condition === "sun"){
         box.style.backgroundImage = `url(img/sun.jpg)`;
-        //container.style.backgroundColor = '#f97316';
         degree.style.color = '#fff';
     }
    
