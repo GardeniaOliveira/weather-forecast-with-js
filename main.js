@@ -11,6 +11,7 @@ const description = document.querySelector(".description");
 const wind = document.querySelector(".wind");
 const humidity = document.querySelector(".humidity");
 const errorMsg = document.querySelector(".error-msg");
+const night = new Date().getHours();
 
 btnSearch.addEventListener("click", () => {
   divWeather.classList.remove("hidden");
@@ -36,7 +37,7 @@ const showData = async (city) => {
     icon.src = iconUrl;
     description.innerText = data.weather[0].description;
     degree.innerText = `${parseInt(data.main.temp)}°C`;
-    wind.innerText = `${data.wind.speed}m/s`;
+    wind.innerText = `${data.wind.speed} m/s`;
     humidity.innerText = `${data.main.humidity}%`;
 
     const condition = data.weather[0].main;
@@ -78,8 +79,14 @@ function imageWeather(condition) {
     box.style.backgroundImage = `url(img/sun.jpg)`;
     degree.style.color = "#fff";
   }
+  else if (condition === "Clear" && night >= 18) {
+    box.style.backgroundImage = `url(img/clear-sky-night.jpg)`;
+    degree.style.color = "#fff";
+  }
   else if (condition === "Clear") {
     box.style.backgroundImage = `url(img/clear-sky.jpg)`;
     degree.style.color = "#fff";
   }
 }
+
+
