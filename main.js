@@ -6,6 +6,7 @@ const btnSearch = document.querySelector("#btn-search");
 const divWeather = document.querySelector(".weather-info");
 const place = document.querySelector(".location");
 const degree = document.querySelector(".degree");
+const icon = document.querySelector(".icon");
 const description = document.querySelector(".description");
 const wind = document.querySelector(".wind");
 const humidity = document.querySelector(".humidity");
@@ -16,7 +17,7 @@ btnSearch.addEventListener("click", () => {
   const city = inputSearch.value;
   inputSearch.value = "";
   showData(city);
-  
+
 });
 inputSearch.addEventListener("keyup", (e) => {
   if (e.code === "Enter") {
@@ -28,32 +29,34 @@ inputSearch.addEventListener("keyup", (e) => {
 });
 
 const showData = async (city) => {
-    try {
-  const data = await getData(city);
-  place.innerText = `${data.name},${data.sys.country}`;
-  description.innerText = data.weather[0].description;
-  degree.innerText = `${parseInt(data.main.temp)}°C`;
-  wind.innerText = data.wind.speed;
-  humidity.innerText = `${data.main.humidity}%`;
+  try {
+    const data = await getData(city);
+    place.innerText = `${data.name},${data.sys.country}`;
+    const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`
+    icon.src = iconUrl;
+    description.innerText = data.weather[0].description;
+    degree.innerText = `${parseInt(data.main.temp)}°C`;
+    wind.innerText = `${data.wind.speed}m/s`;
+    humidity.innerText = `${data.main.humidity}%`;
 
-  const condition = data.weather[0].main;
-  imageWeather(condition);
-  errorMsg.innerText = "";
-}  catch (error) {
+    const condition = data.weather[0].main;
+    imageWeather(condition);
+    errorMsg.innerText = "";
+  } catch (error) {
     errorMsg.innerText = `City not found`;
-   divWeather.classList.add('hidden')
+    divWeather.classList.add('hidden')
   }
 };
 
 //It is async because it needs to wait the datas from api
 const getData = async (city) => {
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=en`;
-    const apiReturn = await fetch(apiUrl);
-    //change the data to json
-    const data = await apiReturn.json();
-    console.log(data);
-    return data;
- 
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  const apiReturn = await fetch(apiUrl);
+  //change the data to json
+  const data = await apiReturn.json();
+  console.log(data);
+  return data;
+
 };
 
 function imageWeather(condition) {
